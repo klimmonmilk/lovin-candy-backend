@@ -5,12 +5,12 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "username": "test3",
-    "email": "test3@example.com",
-    "password": "test3",
-    "first_name": "test3",
-    "last_name": "test3",
-    "address": "test3",
+    "username": "test5",
+    "email": "test5@example.com",
+    "password": "test5",
+    "first_name": "test5",
+    "last_name": "test5",
+    "address": "test5",
     "role": "USER"
 
 }
