@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { Product } from "./product.model.js";
+import { POPULARITY_SCORE } from "../../constants/popularity_score.js";
+
 
 export const getProducts = async (req, res, next) => {
   try {
@@ -33,6 +35,38 @@ export const getProducts = async (req, res, next) => {
   }
 };
 
+export const getProductById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid product id",
+      });
+    }
+
+    const product = await Product.findByIdAndUpdate(
+      id,
+      { $inc: { popularity_score: POPULARITY_SCORE.VIEW } },
+      { new: true }
+    );
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: product,
+    });
+  } catch (err) {
+    next(err)
+  }
+};
 
 export const deleteProduct = async (req, res, next) => {
   try {

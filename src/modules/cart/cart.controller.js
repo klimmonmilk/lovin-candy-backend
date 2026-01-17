@@ -1,5 +1,6 @@
 import { Cart } from "./cart.model.js";
 import { Product } from "../product/product.model.js";
+import { POPULARITY_SCORE } from "../../constants/popularity_score.js";
 
 export const addItemToCart = async (req, res) => {
   try {
@@ -31,14 +32,19 @@ export const addItemToCart = async (req, res) => {
     );
 
     if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.items.push({
-        product: productId,
-        quantity,
-        price: product.price,
-      });
-    }
+  existingItem.quantity += quantity;
+} else {
+  cart.items.push({
+    product: productId,
+    quantity,
+    price: product.price,
+  });
+
+  // 🔥 update popularity เฉพาะตอน add ใหม่
+  await Product.findByIdAndUpdate(productId, {
+    $inc: { popularityScore: POPULARITY_SCORE.ADD_TO_CART },
+  });
+}
 
     cart.totalPrice = cart.items.reduce(
       (sum, item) => sum + item.quantity * item.price,
