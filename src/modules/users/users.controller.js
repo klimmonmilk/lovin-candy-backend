@@ -194,3 +194,40 @@ export const me = async (req, res, next) => {
     next(error);
   }
 };
+
+// REGISTER
+export const register = async (req, res, next) => {
+  const { email, password, confirmPassword } = req.body;
+
+  try {
+    if (password !== confirmPassword) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Passwords do not match" 
+      });
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: "Email already exists" });
+    }
+
+    const newUser = await User.create({
+      email,
+      password,
+      username: `user_${Math.floor(1000 + Math.random() * 9000)}`,
+      role: "USER"
+    });
+    return res.status(201).json({
+    success: true,
+    message: "Registration successful",
+    data: {
+      id: newUser._id,
+      email: newUser.email,
+      username: newUser.username
+  }
+});
+  } catch (error) {
+    next(error);
+  }
+};

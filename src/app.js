@@ -18,18 +18,6 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "https://lovin-candy-web.vercel.app"
-  ],
-  credentials: true // allow cookies to be sent
-};
-
-app.use(cors(corsOptions)); 
-
 app.use("/api", apiRoutes);
 
 // error handling

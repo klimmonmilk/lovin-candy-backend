@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, delAddress, getUsers, login, me, updateAddress } from "../modules/users/users.controller.js";
+import { createUser, delAddress, getUsers, login, me, register, updateAddress } from "../modules/users/users.controller.js";
 import { auth } from "../middlewares/auth.middleware.js";
 
 export const router = Router();
@@ -15,3 +15,5 @@ router.delete("/:id", delAddress);
 router.put("/:id", updateAddress);
 
 router.post("/login", login);
+
+router.post("/register", register);
