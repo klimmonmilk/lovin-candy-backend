@@ -10,6 +10,7 @@ import { createUser,
 } from "../modules/users/users.controller.js";
 
 import { auth } from "../middlewares/auth.middleware.js";
+import { isAdmin } from "../middlewares/isAdmin.middleware.js";
 
 export const router = Router();
 
@@ -29,4 +30,6 @@ router.put("/address", auth, updateAddress);
 
 router.delete("/address", auth, delAddress);
 
+router.get("/", auth, isAdmin, getUsers);
 
+router.delete("/:id", auth, isAdmin, delAddress);
