@@ -26,7 +26,6 @@ router.put("/update-profile", auth, updateProfile);
 router.delete("/address", auth, delAddress);
 
 
-
 router.get("/", auth, isAdmin, getUsers);
 
 router.delete("/:id", auth, isAdmin, delAddress);
