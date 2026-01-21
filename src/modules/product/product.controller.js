@@ -211,7 +211,7 @@ export const updateProduct = async (req, res, next) => {
         message: "Invalid product id",
       });
     }
-    
+
   try {
     const doc = await Product.findByIdAndUpdate(id, body, { new: true });
 

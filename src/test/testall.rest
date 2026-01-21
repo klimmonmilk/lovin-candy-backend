@@ -47,13 +47,15 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-    "name": "Test Barbara1",
-    "description": "Delicious barbara1 chocolate",
-    "price": 5.99,
-    "stock": 50,
-    "category": "chocolate"
+    "name": "XmasSetXL",
+  "price": 459,
+  "stock": 100,
+  "category": "specialset",
+  "imageUrl": "https://res.cloudinary.com/dcwlgjz6z/image/upload/v1768924858/XmasSetXL_qdlosa.png"
 }
 
+
+//gummy, chocolate, lollipop,specialset
 ### Get Product by ID Test
 GET http://localhost:3000/api/products/696e7878dc53bb780fcc29b7
 
