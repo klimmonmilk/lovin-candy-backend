@@ -1,6 +1,6 @@
-// Test instead of PRODUCT_ID = 696897940f34cb9f5d50c48f
+// Test of PRODUCT_ID = 696897940f34cb9f5d50c48f
 
-### ORDER_SUCCESS popularity
+### View popularity
 PUT http://localhost:3000/api/products/696897940f34cb9f5d50c48f/popular
 Content-Type: application/json
 
