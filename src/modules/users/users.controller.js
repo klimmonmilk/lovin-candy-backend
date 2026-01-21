@@ -128,16 +128,16 @@ export const updateAddress = async (req, res, next) => {
   const { address } = req.body;
 
   try {
-    const trimmed = String(address || "").trim();
-    if (!trimmed) {
-      return res
-        .status(400)
-        .json({ success: false, message: "address is required" });
+    if (!address || typeof address !== 'object') {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Address data is required as an object" 
+      });
     }
 
     const updated = await User.findByIdAndUpdate(
       userId,
-      { address: trimmed },
+      { address: address },
       { new: true }
     );
 
@@ -148,33 +148,6 @@ export const updateAddress = async (req, res, next) => {
     }
 
     return res.status(200).json({ success: true, data: updated });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const delAddress = async (req, res, next) => {
-  const userId = req.user?.id;
-
-  try {
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { $unset: { address: "" } },
-      { new: true }
-    );
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "Address deleted successfully",
-      data: user,
-    });
   } catch (error) {
     next(error);
   }

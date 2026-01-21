@@ -6,13 +6,13 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "username": "test6",
-    "email": "test6@example.com",
-    "password": "test6",
-    "first_name": "test6",
-    "last_name": "test6",
-    "address": "test6",
-    "role": "USER"
+    "username": "moai",
+    "email": "moai@admin.com",
+    "password": "moai",
+    "first_name": "moai",
+    "last_name": "moai",
+    "address": "moai",
+    "role": "ADMIN"
 }
 
 ### Get User by ID Test
@@ -119,11 +119,12 @@ GET http://localhost:3000/api/products/popular
 ### Create Order Test
 POST http://localhost:3000/api/orders
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "items": [
         {
-            "product_id": "696e7878dc53bb780fcc29b7",
+            "product_id": "697046135656ead08646bc15",
             "quantity": 1
         }
     ]
@@ -144,7 +145,7 @@ Content-Type: application/json
 }
 
 ### Delete Order Test
-DELETE http://localhost:3000/api/orders/696f1ea1ce5aef6cfff46a9b
+DELETE http://localhost:3000/api/orders/69706991a0cdea794a58dcd0
 Authorization: Bearer {{token}}
 
 ### User Profile Test
@@ -157,8 +158,8 @@ POST http://localhost:3000/api/users/login
 Content-Type: application/json
 
 {
-    "email": "test6@example.com",
-    "password": "test6"
+    "email": "1test@example.com",
+    "password": "1test"
 }
 
 ### บรรทัดนี้คือการดึง Token มาเก็บไว้ในตัวแปรชื่อ 'token'
