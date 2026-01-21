@@ -31,6 +31,40 @@ export const createUser = async (req, res, next) => {
   }
 };
 
+export const createAddress = async (req, res, next) => {
+  const { id } = req.params;
+  const { address } = req.body;
+
+  try {
+    if (!address) {
+      return res.status(400).json({
+        success: false,
+        message: "address is required",
+      });
+    }
+
+    const updateUser = await User.findByIdAndUpdate(
+      id,
+      { address },
+      { new: true }
+    );
+
+    if (!updateUser) {
+      const error = new Error("User not found");
+      error.status = 404;
+      return next(error);
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Address created successfully",
+      data: updateUser,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const delAddress = async (req, res, next) => {
   const { id } = req.params;
 
